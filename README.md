@@ -5,34 +5,57 @@ https://api.flutter.dev/flutter/widgets/Wrap-class.html
 ![image](https://github.com/luiscoco/flutter_wrap_widget/assets/32194879/61298e11-fc47-4952-ac09-5c11d487ff94)
 
 ```dart
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-
-import 'package:flutter_wrap_widget/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  runApp(MyApp());
+}
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MyWrapApp(),
+    );
+  }
+}
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+class MyWrapApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Wrap Widget Sample'),
+      ),
+      body: Wrap(
+        spacing: 8.0, // spacing between adjacent chips
+        runSpacing: 4.0, // spacing between lines of chips
+        children: [
+          MyChip('Flutter'),
+          MyChip('Dart'),
+          MyChip('Widgets'),
+          MyChip('Mobile'),
+          MyChip('Development'),
+          MyChip('UI'),
+          MyChip('Layout'),
+        ],
+      ),
+    );
+  }
+}
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
-  });
+class MyChip extends StatelessWidget {
+  final String label;
+
+  MyChip(this.label);
+
+  @override
+  Widget build(BuildContext context) {
+    return Chip(
+      label: Text(label),
+      backgroundColor: Colors.blue,
+      labelStyle: TextStyle(color: Colors.white),
+    );
+  }
 }
 ```
